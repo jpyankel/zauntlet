@@ -1,2 +1,4 @@
 # Our main gamedata class.
-class GameData(object): pass
+from src.windowdata import WindowData
+class GameData(object):
+    window = WindowData()

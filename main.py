@@ -1,11 +1,12 @@
 # Main game loop
 import pygame, socket, math
-from src.gamedata import *
+from src.gamedata import GameData
 
 def main():
     pygame.init()
     clock = pygame.time.Clock()
-    screen = pygame.display.set_mode((640, 480))
+    data = GameData()
+    screen = pygame.display.set_mode((data.window.width, data.window.height))
     
     running = True
     while running:
