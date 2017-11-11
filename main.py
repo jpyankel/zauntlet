@@ -24,12 +24,21 @@ def handle(event,data):
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_UP:
             data.keysPressed.add("up")
-        if event.key == pygame.K_DOWN:
+        elif event.key == pygame.K_DOWN:
             data.keysPressed.add("down")
-        if event.key == pygame.K_LEFT:
+        elif event.key == pygame.K_LEFT:
             data.keysPressed.add("left")
-        if event.key == pygame.K_RIGHT:
+        elif event.key == pygame.K_RIGHT:
             data.keysPressed.add("right")
+    elif event.type == pygame.KEYUP:
+        if event.key == pygame.K_UP:
+            data.keysPressed.remove("up")
+        elif event.key == pygame.K_DOWN:
+            data.keysPressed.remove("down")
+        elif event.key == pygame.K_LEFT:
+            data.keysPressed.remove("left")
+        elif event.key == pygame.K_RIGHT:
+            data.keysPressed.remove("right")
 def handleMovement(event,data):
     if "up" in data.keysPressed:
         dir = (0,1)
