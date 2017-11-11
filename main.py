@@ -26,6 +26,7 @@ def handle(event,data):
             data.keysPressed.add("up")
         elif event.key == pygame.K_DOWN:
             data.keysPressed.add("down")
+            data.mostRecentDir = "down"
         elif event.key == pygame.K_LEFT:
             data.keysPressed.add("left")
         elif event.key == pygame.K_RIGHT:

@@ -4,3 +4,4 @@ class GameData(object):
     def __init__ (self):
         self.window = WindowData()
         self.keysPressed = set()
+        self.mostRecentDir = None
