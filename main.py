@@ -1,19 +1,28 @@
 # Main game loop
 import pygame, socket, math
 from src.gamedata import GameData
+from src.static import *
+from src.render import redrawAll, SpriteGroups
 
 def main():
     pygame.init()
     clock = pygame.time.Clock()
+    screen = pygame.display.set_mode((640, 480))
+    Image.init()
     data = GameData()
-    screen = pygame.display.set_mode((data.window.width, data.window.height))
-
+    
+    groups = SpriteGroups()
+    groups.player.add(data.localPlayer)
+    
     running = True
     while running:
         time = clock.tick(60) #similar to timerDelay
         screen.fill((255,0,0))
         for event in pygame.event.get():
             handle(event,data)
+        screen.fill((50,50,50))
+        redrawAll(screen, data, groups)
+        pygame.display.flip()
     pygame.quit()
     
 def handle(event,data):
@@ -55,14 +64,3 @@ def handleMovement(event,data):
         dir = (1,0)
     
 main()
-=======
-            handle(event)
-
-    pygame.quit()
-
-def handle(event):
-    if event.type == pygame.QUIT:
-        running = False
-
-main()
->>>>>>> 1c2f90342533fb7547428c64fc08e07d12c32771
