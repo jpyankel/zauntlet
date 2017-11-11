@@ -2,5 +2,8 @@
 from src.windowdata import WindowData
 from src.player import Player
 class GameData(object):
-    window = WindowData()
-    localplayer = Player()
+
+    def __init__ (self):
+        self.window = WindowData()
+        self.keysPressed = set()
+        self.localplayer = Player()
