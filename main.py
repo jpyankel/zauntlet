@@ -10,8 +10,8 @@ def main():
     
     running = True
     while running:
-        time = clock.tick(60) #similar to timerDelay
-    
+        time = clock.tick(60) #similar to timerDelay    
+        
         for event in pygame.event.get():
             handle(event)
     
