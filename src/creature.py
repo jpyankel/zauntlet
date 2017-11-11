@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import pygame
 
 class Creature(pygame.sprite.Sprite):
@@ -10,4 +11,12 @@ class Creature(pygame.sprite.Sprite):
         self.image = pygame.Surface((size, size), pygame.SRCALPHA)
         self.image = self.image.convert_alpha()
     def update(self, date):
+=======
+class Creature(object):
+    def __init__(self):
+        pass
+    def move(self,dir):
+        pass
+    def draw(self):
+>>>>>>> 6686f046cc82e5c0e872f9e6360ae356f34a0f6d
         pass

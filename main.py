@@ -39,7 +39,7 @@ def handle(event,data):
             data.keysPressed.add("left")
         elif event.key == pygame.K_RIGHT:
             data.keysPressed.add("right")
-        elif event.key == pygame_K_ESCAPE:#when you press the escape button
+        elif event.key == pygame.K_ESCAPE:#when you press the escape button
             running = False
 #when you get off the keys
     elif event.type == pygame.KEYUP:
@@ -51,16 +51,22 @@ def handle(event,data):
             data.keysPressed.remove("left")
         elif event.key == pygame.K_RIGHT:
             data.keysPressed.remove("right")
-
+            
 def handleMovement(event,data):
 #changing the x and y coordinates depending on the keys pressed 
     if "up" in data.keysPressed:
         dir = (0,1)
-    if "down" in data.keysPressed:
+    elif "down" in data.keysPressed:
         dir = (0,-1)
-    if "left" in data.keysPressed:
+    elif "left" in data.keysPressed:
         dir = (-1,0)
-    if "right" in data.keysPressed:
+    elif "right" in data.keysPressed:
         dir = (1,0)
+<<<<<<< HEAD
     
 main()
+=======
+
+main()
+
+>>>>>>> 6686f046cc82e5c0e872f9e6360ae356f34a0f6d
