@@ -7,18 +7,18 @@ def main():
     clock = pygame.time.Clock()
     data = GameData()
     screen = pygame.display.set_mode((data.window.width, data.window.height))
-    
+
     running = True
     while running:
-        time = clock.tick(60) #similar to timerDelay    
-        
+        time = clock.tick(60) #similar to timerDelay
+        screen.fill((255,0,0))
         for event in pygame.event.get():
             handle(event)
-    
+
     pygame.quit()
-    
+
 def handle(event):
     if event.type == pygame.QUIT:
         running = False
-        
+
 main()
