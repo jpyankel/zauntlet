@@ -7,15 +7,15 @@ from src.render import redrawAll, SpriteGroups
 def main():
     pygame.init()
     clock = pygame.time.Clock()
-    screen = pygame.display.set_mode((640, 480))
-    Image.init()
     data = GameData()
+    screen = pygame.display.set_mode((data.window.width, data.window.height))
+    Image.init()
+    data.initPlayer()
     
     groups = SpriteGroups()
     groups.player.add(data.localPlayer)
     
-    running = True
-    while running:
+    while data.running:
         time = clock.tick(60) #similar to timerDelay
         screen.fill((255,0,0))
         for event in pygame.event.get():
@@ -28,7 +28,7 @@ def main():
 def handle(event,data):
 #When you quit the window
     if event.type == pygame.QUIT:
-        running = False
+        data.running = False
 #when you press the keys
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_UP:
@@ -40,7 +40,7 @@ def handle(event,data):
         elif event.key == pygame.K_RIGHT:
             data.keysPressed.add("right")
         elif event.key == pygame.K_ESCAPE:#when you press the escape button
-            running = False
+            data.running = False
 #when you get off the keys
     elif event.type == pygame.KEYUP:
         if event.key == pygame.K_UP:
@@ -61,11 +61,6 @@ def handleMovement(event,data):
         dir = (-1,0)
     elif "right" in data.keysPressed:
         dir = (1,0)
-<<<<<<< HEAD
-    
-main()
-=======
 
 main()
 
->>>>>>> 6686f046cc82e5c0e872f9e6360ae356f34a0f6d

@@ -3,9 +3,9 @@ from src.static import *
 class Player (Creature):
     def __init__(self, x, y, size):
         super().__init__(x, y, size)
-        self.dx = 1
-        self.dy = 1
-        self.image.blit(Image.LINK, self.rect)
+        self.dx = 2
+        self.dy = 2
+        self.image.blit(Image.LINK, (0,0))
     def update(self, data):
         if "up" in data.keysPressed:
             self.y -= self.dy
