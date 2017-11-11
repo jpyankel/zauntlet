@@ -51,7 +51,6 @@ def handle(event,data):
             data.keysPressed.remove("left")
         elif event.key == pygame.K_RIGHT:
             data.keysPressed.remove("right")
-            
 def handleMovement(event,data):
 #changing the x and y coordinates depending on the keys pressed 
     if "up" in data.keysPressed:
