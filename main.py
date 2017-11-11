@@ -12,9 +12,12 @@ def main():
         time = clock.tick(60) #similar to timerDelay
     
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+            handle(event)
     
     pygame.quit()
     
+def handle(event):
+    if event.type == pygame.QUIT:
+        running = False
+        
 main()
