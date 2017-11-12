@@ -1,30 +1,32 @@
 # Main game loop
-import pygame, socket, math
+import pygame, socket, math, argparse
 from src.gamedata import GameData
 from src.static import *
 from src.render import redrawAll, updateAll
 
-def main():
+def main ():
     pygame.init()
     clock = pygame.time.Clock()
     data = GameData()
+    # Initialize Screen:
     screen = pygame.display.set_mode((data.window.width, data.window.height))
     Image.init()
     data.initGroups()
-    
+    data.dungeonMap.loadCurrentRoom(data)
+
     while data.running:
         time = clock.tick(60) #similar to timerDelay
-        screen.fill((255,0,0))
+        screen.fill((50, 50, 50)) # background
         for event in pygame.event.get():
             handle(event,data)
-        screen.fill((50,50,50))
         updateAll(data)
         redrawAll(screen, data)
         pygame.display.flip()
         #print(data.mostRecentDir)
     pygame.quit()
+
 def handle(event,data):
-#When you quit the window
+    #When you quit the window
     if event.type == pygame.QUIT:
         data.running = False
 #when you press the keys
@@ -66,5 +68,5 @@ def handle(event,data):
         if data.mostRecentDir == None and len(data.keysPressed)> 0:
             data.mostRecentDir = data.keysPressed[-1]
 
-main()
-
+if __name__ == "__main__":
+    main()
