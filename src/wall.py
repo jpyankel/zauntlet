@@ -16,14 +16,14 @@ class DamagedWall(GameObject):
         super().__init__(x, y, Value.TERRAIN_SIZE)
         self.HP = 10
         self.MaxHP = self.HP
-        self.image.blit(Image.WALL, (0,0))
+        self.image.blit(Image.DAMAGED_WALL_0, (0,0))
     
     def takeDamage(self, data):
         self.HP -= 1
         if self.HP <= 2*self.MaxHP/3 and self.HP > self.MaxHP/3:
-            pass
+            self.image.blit(Image.DAMAGED_WALL_1, (0,0))
         elif self.HP <= self.MaxHP/3 and self.HP > 0:
-            pass
+            self.image.blit(Image.DAMAGED_WALL_2, (0,0))
         elif self.HP <= 0:
             data.groups.walls.remove(self)
         

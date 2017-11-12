@@ -4,7 +4,7 @@ from src.tile import Tile
 import pygame
 from src.wall import Wall, DamagedWall
 from src.player import Player
-from src.enemy import Monster, Spawner
+from src.enemy import Monster, Spawner, Ghost
 
 class Dungeon ():
     """
@@ -56,6 +56,10 @@ class Dungeon ():
                     wallX = col*Value.CELL_SIZE + Value.CELL_SIZE/2
                     wallY = row*Value.CELL_SIZE + Value.CELL_SIZE/2
                     data.groups.walls.add(DamagedWall(wallX, wallY, Value.TERRAIN_SIZE))
+                elif currRoom[row][col] == StaticDungeonLayout.GHOST_CHAR:
+                    ghostX = col*Value.CELL_SIZE + Value.CELL_SIZE/2
+                    ghostY = row*Value.CELL_SIZE + Value.CELL_SIZE/2
+                    data.groups.monsters.add(Ghost(ghostX, ghostY, Value.GHOST_SIZE))
 
 class Room ():
     """

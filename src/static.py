@@ -15,6 +15,11 @@ class Image(object):
         Image.SPAWNER = pygame.transform.scale(Image.SPAWNER, (Value.SPAWNER_SIZE, Value.SPAWNER_SIZE))
         Image.HEART = pygame.image.load("src/images/heart.png").convert_alpha()
         Image.FOODOFYENDOR = pygame.image.load("src/images/link.png").convert_alpha()
+        Image.DAMAGED_WALL_0 = pygame.image.load("src/images/damagedwall0.png").convert_alpha()
+        Image.DAMAGED_WALL_1 = pygame.image.load("src/images/damagedwall1.png").convert_alpha()
+        Image.DAMAGED_WALL_2 = pygame.image.load("src/images/damagedwall2.png").convert_alpha()
+        Image.GHOST = pygame.image.load("src/images/ghost.png").convert_alpha()
+        Image.GHOST = pygame.transform.scale(Image.GHOST, (Value.GHOST_SIZE, Value.GHOST_SIZE))
 
 class StaticPath ():
     DUNGEON_LAYOUT_DIR = "src/dungeonlayout/"
@@ -30,6 +35,7 @@ class StaticDungeonLayout ():
     MONSTER_CHAR = "M"
     SPAWNER_CHAR = "S"
     DAMAGED_WALL_CHAR = "%"
+    GHOST_CHAR = "G"
 
 class Value(object):
     WINDOW_WIDTH = 640
@@ -48,3 +54,4 @@ class Value(object):
     HEART_CONTAINER_SIZE = 16
     MAX_HP = 3
     HEART_DROP_CHANCE = 0.25
+    GHOST_SIZE = 32
