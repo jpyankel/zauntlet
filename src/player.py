@@ -28,11 +28,35 @@ class Player (GameObject):
             elif data.mostRecentDir == "right":
                 self.x += self.dx
                 self.facing = data.mostRecentDir
+        self.checkBounds(data)
         self.rect = pygame.Rect(self.x - self.size/2, self.y - self.size/2,
                                 self.size, self.size)
+
     def fireProjectile(self, data):
         data.groups.projectiles.add(Projectile(self.x, self.y,\
                                     self.facing, Value.PROJECTILE_SIZE))
+
+    def checkBounds (self, data):
+        """
+            Ensures that a scene transition takes place if the player moves off
+             the screen.
+        """
+        sceneTransitionDir = None
+        if self.x + Value.PLAYER_SIZE/2 >= Value.WINDOW_WIDTH + Value.PLAYER_SIZE:
+            sceneTransitionDir = "right"
+            self.x = Value.WINDOW_WIDTH - Value.PLAYER_SIZE # Undo move in advance
+        elif self.x - Value.PLAYER_SIZE/2 <= -Value.PLAYER_SIZE:
+            sceneTransitionDir = "left"
+            self.x = Value.PLAYER_SIZE
+        elif self.y + Value.PLAYER_SIZE/2 >= Value.WINDOW_HEIGHT + Value.PLAYER_SIZE:
+            sceneTransitionDir = "down"
+            self.y = Value.WINDOW_HEIGHT - Value.PLAYER_SIZE
+        elif self.y - Value.PLAYER_SIZE/2 <= -Value.PLAYER_SIZE:
+            sceneTransitionDir = "up"
+            self.y = Value.PLAYER_SIZE
+        if sceneTransitionDir != None:
+            # Attempt a screen transition:
+            data.tryTransition(sceneTransitionDir)
 
 class Projectile(GameObject):
     def __init__(self, x, y, direction, size):
@@ -45,9 +69,9 @@ class Projectile(GameObject):
     def update(self, data):
         self.x += self.dx
         self.y += self.dy
-        if self.x < 0 or self.x > data.window.width:
+        if self.x < 0 or self.x > Value.WINDOW_WIDTH:
             data.groups.projectiles.remove(self)
-        elif self.y < 0 or self.y > data.window.height:
+        elif self.y < 0 or self.y > Value.WINDOW_HEIGHT:
             data.groups.projectiles.remove(self)
         self.rect = pygame.Rect(self.x - self.size/2, self.y - self.size/2,
                                 self.size, self.size)
