@@ -2,7 +2,7 @@
 import pygame, socket, math
 from src.gamedata import GameData
 from src.static import *
-from src.render import redrawAll, SpriteGroups
+from src.render import redrawAll, updateAll
 
 def main():
     pygame.init()
@@ -10,10 +10,7 @@ def main():
     data = GameData()
     screen = pygame.display.set_mode((data.window.width, data.window.height))
     Image.init()
-    data.initPlayer()
-    
-    groups = SpriteGroups()
-    groups.player.add(data.localPlayer)
+    data.initGroups()
     
     while data.running:
         time = clock.tick(60) #similar to timerDelay
@@ -21,7 +18,8 @@ def main():
         for event in pygame.event.get():
             handle(event,data)
         screen.fill((50,50,50))
-        redrawAll(screen, data, groups)
+        updateAll(data)
+        redrawAll(screen, data)
         pygame.display.flip()
     pygame.quit()
     

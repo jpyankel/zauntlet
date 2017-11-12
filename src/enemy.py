@@ -1,3 +1,3 @@
-from src.creature import Creature
-class Enemy(Creature):
+from src.gameobject import GameObject
+class Enemy(GameObject):
     pass
