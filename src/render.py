@@ -12,10 +12,12 @@ def redrawAll(screen, data):
     data.groups.player.draw(screen)
     data.groups.projectiles.draw(screen)
     data.groups.monsters.draw(screen)
+    data.groups.ui.draw(screen)
 
 def checkCollision(data):
     pygame.sprite.groupcollide(data.groups.projectiles, data.groups.walls, True, False)
     if pygame.sprite.groupcollide(data.groups.player, data.groups.monsters, False, True):
         data.player.HP -= 1
+        data.ui.updateHearts(data)
     if pygame.sprite.groupcollide(data.groups.projectiles, data.groups.monsters, True, True):
         pass

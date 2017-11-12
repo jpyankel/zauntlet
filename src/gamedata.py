@@ -55,3 +55,4 @@ class SpriteGroups(object):
         self.player = pygame.sprite.Group()
         self.projectiles = pygame.sprite.Group()
         self.monsters = pygame.sprite.Group()
+        self.ui = pygame.sprite.Group()

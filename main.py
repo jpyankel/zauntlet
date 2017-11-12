@@ -3,6 +3,7 @@ import pygame, socket, math, argparse
 from src.gamedata import GameData
 from src.static import *
 from src.render import *
+from src.ui import UI
 
 def main ():
     pygame.init()
@@ -13,6 +14,7 @@ def main ():
     Image.init()
     data.initGroups()
     data.dungeonMap.loadCurrentRoom(data)
+    data.ui = UI(data)
 
     while data.running:
         time = clock.tick(60) #similar to timerDelay
