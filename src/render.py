@@ -1,5 +1,6 @@
 # Drawing functions like redrawAll()
 import pygame
+from src.wall import Wall, DamagedWall
 
 def updateAll(data):
     """
@@ -22,6 +23,7 @@ def redrawAll(screen, data):
     data.groups.monsters.draw(screen)
     data.groups.items.draw(screen)
     data.groups.ui.draw(screen)
+    data.groups.damagedWalls.draw(screen)
 
 def checkCollisions(data):
     # Check collisions with the player and monsters:
@@ -41,8 +43,12 @@ def checkProjectileCollisions(data):
         Projectiles are automatically deleted upon collision
     """
     # Delete any projectiles that hit walls.
-    pygame.sprite.groupcollide(data.groups.projectiles, data.groups.walls, True,
-                               False)
+    collision = pygame.sprite.groupcollide(data.groups.projectiles,\
+                                           data.groups.walls, True, False)
+    if collision:
+        for collide in collision.keys():
+            for item in collision[collide]:
+                if isinstance(item, DamagedWall): item.takeDamage(data)
     # Check if projectiles are colliding with monsters:
     collisions = pygame.sprite.groupcollide(data.groups.projectiles,
                                             data.groups.monsters, True, False)

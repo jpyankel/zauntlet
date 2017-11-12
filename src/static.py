@@ -29,6 +29,7 @@ class StaticDungeonLayout ():
     PLAYER_CHAR = "P"
     MONSTER_CHAR = "M"
     SPAWNER_CHAR = "S"
+    DAMAGED_WALL_CHAR = "%"
 
 class Value(object):
     WINDOW_WIDTH = 640
