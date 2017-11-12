@@ -16,10 +16,9 @@ def main ():
 
     while data.running:
         time = clock.tick(60) #similar to timerDelay
-        screen.fill((255,0,0))
+        screen.fill((50, 50, 50)) # background
         for event in pygame.event.get():
             handle(event,data)
-        screen.fill((50,50,50))
         updateAll(data)
         redrawAll(screen, data)
         pygame.display.flip()

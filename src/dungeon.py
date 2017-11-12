@@ -10,26 +10,26 @@ class Dungeon ():
         Contains a 2D list of Rooms.
     """
     def __init__ (self):
-        self.rooms = []
-        self.rooms.append(Room(0,0))
+        self.rooms = [[]]
+        self.rooms[0].append(Room(0,0))
 
     def loadCurrentRoom (self, data):
         """
             Sets up rendering of the room at the currentRoom position
         """
         data.groups.walls = pygame.sprite.Group() # Empty wall tileset
-        data.groups.tiles = pygame.sprite.Group() # Empty tileset
-        currRoom = self.rooms[data.currentRoomPos[0]][data.currentRoomsPos[1]]\
+        data.groups.terrain = pygame.sprite.Group() # Empty tileset
+        currRoom = self.rooms[data.currentRoomsPos[0]][data.currentRoomsPos[1]]\
                    .tileList
         for row in range(StaticDungeonLayout.DUNGEON_HEIGHT):
             for col in range(StaticDungeonLayout.DUNGEON_WIDTH):
                 # Create a new GameObject based on the type of tile:
                 if currRoom[row][col] == StaticDungeonLayout.WALL_CHAR:
-                    newWall = Wall(row, col)
+                    newWall = Wall(row, col, data)
                     data.groups.walls.add(newWall)
                 elif currRoom[row][col] == StaticDungeonLayout.TILE_CHAR:
-                    newTile = Tile(row, col)
-                    data.groups.tiles.add(newTile)
+                    newTile = Tile(row, col, data)
+                    data.groups.terrain.add(newTile)
 
 class Room ():
     """
