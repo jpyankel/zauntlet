@@ -11,7 +11,8 @@ class Spawner(GameObject):
 
     def update(self, data):
         if data.timer % Value.SPAWNER_RATE == 0:
-            data.groups.monsters.add(Monster(self.x, self.y, Value.MONSTER_SIZE))
+            if len(data.groups.monsters) <= Value.MONSTER_LIMIT:
+                data.groups.monsters.add(Monster(self.x, self.y, Value.MONSTER_SIZE))
 
     def takeDamage (self, data):
         """
@@ -40,8 +41,11 @@ class Monster(GameObject):
         dy = (self.dy * distanceY)/distance
         collision = pygame.sprite.groupcollide(data.groups.monsters, data.groups.walls, False, False)
         if self in collision:
-            self.x -= dx
-            self.y -= dy
+            for box in collision[self]:
+                if box.x > self.x: self.x -= self.dx
+                else: self.x += self.dx
+                if box.y > self.y: self.y -= self.dy
+                else: self.y += self.dy
         else:
             self.x += dx
             self.y += dy

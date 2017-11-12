@@ -61,3 +61,4 @@ class Value(object):
     HEART_DROP_CHANCE = 0.25
     GHOST_SIZE = 32
     BOSS_SIZE = 64
+    MONSTER_LIMIT = 16
