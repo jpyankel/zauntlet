@@ -42,6 +42,4 @@ class FoodOfYendor (Items):
         """
             End the game.
         """
-        print ("YOU HAVE WON!")
-        # data.winGame()
-        data.groups.items.remove(self)
+        data.winGameSequence(data)

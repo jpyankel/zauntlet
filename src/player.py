@@ -64,6 +64,16 @@ class Player (GameObject):
             self.HP += amount
             data.ui.updateHearts(data)
 
+    def takeDamage(self, data, amount=1):
+        """
+            Take damage and die with a gameover screen if HP goes to zero.
+        """
+        self.HP -= amount
+        data.ui.updateHearts(data)
+        if self.HP <= 0:
+            data.gameOverSequence(data)
+
+
 class Projectile(GameObject):
     def __init__(self, x, y, direction, size):
         super().__init__(x, y, size)

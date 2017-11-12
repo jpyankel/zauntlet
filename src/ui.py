@@ -23,6 +23,14 @@ class UI ():
                              Value.UI_HEART_SIZE)
             data.groups.ui.add(newHeart) # Add new heart to be rendered
 
+    def drawGameOver (self, data):
+        """ Draws the game over screen """
+        data.screenUI = Image.GAMEOVERSCREEN
+
+    def drawWinScreen (self, data):
+        """ Draws the win screen """
+        data.screenUI = Image.WINSCREEN
+
 class Heart (GameObject):
     """
         UI Heart sprite

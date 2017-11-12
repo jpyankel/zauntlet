@@ -6,10 +6,11 @@ def updateAll(data):
     """
         Called every frame to update various changing values.
     """
-    data.groups.player.update(data)
-    data.groups.projectiles.update(data)
-    data.groups.monsters.update(data)
-    data.groups.spawners.update(data)
+    if (data.updatePositions):
+        data.groups.player.update(data)
+        data.groups.projectiles.update(data)
+        data.groups.monsters.update(data)
+        data.groups.spawners.update(data)
 
 def redrawAll(screen, data):
     """
@@ -24,17 +25,19 @@ def redrawAll(screen, data):
     data.groups.items.draw(screen)
     data.groups.ui.draw(screen)
     data.groups.damagedWalls.draw(screen)
+    if data.screenUI != None:
+        screen.blit(data.screenUI, (0, 0))
 
 def checkCollisions(data):
     # Check collisions with the player and monsters:
-    if pygame.sprite.groupcollide(data.groups.player, data.groups.monsters,
-                                  False, True):
-        data.player.HP -= 1
-        data.ui.updateHearts(data)
-    # Run projectile collision detection:
-    checkProjectileCollisions(data)
-    # Check player item collisions:
-    checkPlayerItemCollisions(data)
+    if data.updatePositions:
+        if pygame.sprite.groupcollide(data.groups.player, data.groups.monsters,
+                                      False, True):
+            data.player.takeDamage(data)
+        # Run projectile collision detection:
+        checkProjectileCollisions(data)
+        # Check player item collisions:
+        checkPlayerItemCollisions(data)
 
 def checkProjectileCollisions(data):
     """

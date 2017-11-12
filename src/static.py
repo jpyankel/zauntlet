@@ -14,7 +14,9 @@ class Image(object):
         Image.SPAWNER = pygame.image.load("src/images/spawner.png").convert_alpha()
         Image.SPAWNER = pygame.transform.scale(Image.SPAWNER, (Value.SPAWNER_SIZE, Value.SPAWNER_SIZE))
         Image.HEART = pygame.image.load("src/images/heart.png").convert_alpha()
-        Image.FOODOFYENDOR = pygame.image.load("src/images/link.png").convert_alpha()
+        Image.FOODOFYENDOR = pygame.image.load("src/images/foodofyendor.png").convert_alpha()
+        Image.WINSCREEN = pygame.image.load("src/images/winscreen.png")
+        Image.GAMEOVERSCREEN = pygame.image.load("src/images/gameoverscreen.png")
 
 class StaticPath ():
     DUNGEON_LAYOUT_DIR = "src/dungeonlayout/"

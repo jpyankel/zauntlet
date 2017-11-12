@@ -48,7 +48,7 @@ def handle(event,data):
             data.keysPressed.append("right")
         if event.key == pygame.K_ESCAPE:#when you press the escape button
             data.running = False
-        if event.key == pygame.K_SPACE:
+        if event.key == pygame.K_SPACE and data.acceptInput:
             data.player.fireProjectile(data)
 #when you get off the keys
     if event.type == pygame.KEYUP:

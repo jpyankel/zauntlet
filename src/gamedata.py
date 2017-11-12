@@ -7,7 +7,10 @@ import pygame
 class GameData(object):
     def __init__ (self):
         self.running = True
+        self.updatePositions = True
+        self.acceptInput = True
         self.currentRoomsPos = (0, 0)
+        self.screenUI = None # Draw either a win or lose screen when this is filled
         self.dungeonMap = Dungeon()
         self.keysPressed = list()
         self.mostRecentDir = None
@@ -47,6 +50,37 @@ class GameData(object):
                                     self.currentRoomsPos[1]+1)
             self.player.y = Value.PLAYER_SIZE / 2
         self.dungeonMap.loadCurrentRoom(self)
+
+    def gameOverSequence (self, data):
+        """
+            Called when the player dies. Set up the gameOver screen.
+        """
+        # Prevent the game from accepting some inputs and updating:
+        self.acceptInput = False
+        self.updatePositions = False
+        self.resetAllSpriteGroups()
+        self.ui.drawGameOver(data)
+
+    def winSequence (self, data):
+        """
+            Called when the player dies. Set up the gameOver screen.
+        """
+        # Prevent the game from accepting some inputs and updating:
+        self.acceptInput = False
+        self.updatePositions = False
+        self.resetAllSpriteGroups()
+        self.ui.drawWinScreen(data)
+
+    def resetAllSpriteGroups (self):
+        """ Clears all sprite groups. Used for the gameover/win state """
+        self.groups.spawners = pygame.sprite.Group()
+        self.groups.terrain = pygame.sprite.Group()
+        self.groups.walls = pygame.sprite.Group()
+        self.groups.projectiles = pygame.sprite.Group()
+        self.groups.player = pygame.sprite.Group()
+        self.groups.monsters = pygame.sprite.Group()
+        self.groups.items = pygame.sprite.Group()
+        self.groups.ui = pygame.sprite.Group()
 
 class SpriteGroups(object):
     def __init__(self):
