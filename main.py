@@ -4,7 +4,7 @@ from src.gamedata import GameData
 from src.static import *
 from src.render import redrawAll, SpriteGroups
 
-def main (argsList):
+def main ():
     pygame.init()
     clock = pygame.time.Clock()
     data = GameData()
@@ -15,6 +15,9 @@ def main (argsList):
 
     groups = SpriteGroups()
     groups.player.add(data.localPlayer)
+
+    # Load current dungeon position.
+    data.dungeonMap.loadCurrentRoom(data)
 
     while data.running:
         time = clock.tick(60) #similar to timerDelay
