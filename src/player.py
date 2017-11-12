@@ -23,6 +23,7 @@ class Player (GameObject):
         self.rect = pygame.Rect(self.x - self.size/2, self.y - self.size/2,
                                 self.size, self.size)
     def fireProjectile(self, data):
+        print("space presses, facing:", self.facing)
         data.groups.projectiles.add(Projectile(self.x, self.y,\
                                     self.facing, Value.PROJECTILE_SIZE))
 
