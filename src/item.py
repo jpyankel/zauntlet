@@ -13,7 +13,7 @@ class Items (GameObject):
         """
             Called on item pickup by the player. Override by the type of item.
         """
-        data.items.remove(self)
+        data.groups.items.remove(self)
 
 class FoodOfYendor (Items):
     """
@@ -29,4 +29,4 @@ class FoodOfYendor (Items):
         """
         print ("YOU HAVE WON!")
         # data.winGame()
-        data.items.remove(self)
+        data.groups.items.remove(self)
