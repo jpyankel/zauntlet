@@ -7,7 +7,7 @@ import pygame
 class GameData(object):
     def __init__ (self):
         self.running = True
-        self.currentRoomsPos = (0, 0)
+        self.currentRoomsPos = (1, 2) # Magic because pressed for time.
         self.dungeonMap = Dungeon()
         self.keysPressed = list()
         self.mostRecentDir = None

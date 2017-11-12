@@ -16,7 +16,7 @@ class Dungeon ():
         for rowIndex in range(StaticDungeonLayout.DUNGEON_HEIGHT):
             roomRow = []
             for colIndex in range(StaticDungeonLayout.DUNGEON_WIDTH):
-                roomRow.append(Room(rowIndex, colIndex))
+                roomRow.append(Room(colIndex, rowIndex))
             self.rooms.append(roomRow)
 
     def loadCurrentRoom (self, data):
@@ -28,7 +28,7 @@ class Dungeon ():
         data.groups.monsters = pygame.sprite.Group() # Remove all enemies
         data.groups.spawners = pygame.sprite.Group() # Remove old spawners
         data.groups.damagedWalls = pygame.sprite.Group() # Removed old broken walls.
-        currRoom = self.rooms[data.currentRoomsPos[0]][data.currentRoomsPos[1]]\
+        currRoom = self.rooms[data.currentRoomsPos[1]][data.currentRoomsPos[0]]\
                    .tileList
         for row in range(StaticDungeonLayout.DUNGEON_ROOM_HEIGHT):
             for col in range(StaticDungeonLayout.DUNGEON_ROOM_WIDTH):
@@ -71,7 +71,7 @@ class Room ():
             Reads from named text file.
         """
         fileName = os.path.join(StaticPath.DUNGEON_LAYOUT_DIR,
-                                "%d-%d.txt" % (x, y))
+                                "%d-%d.txt" % (y, x))
         try:
             with open(fileName) as f:
                 content = f.readlines()
