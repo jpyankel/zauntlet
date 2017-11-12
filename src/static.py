@@ -32,9 +32,10 @@ class Value(object):
     WINDOW_WIDTH = 640
     WINDOW_HEIGHT = 480
     FRAME_RATE = 60
+    SPAWNER_RATE = 60 * 3 #How many seconds between each monster spawn
     CELL_SIZE = 32
-    PLAYER_SIZE = 48
-    PROJECTILE_SIZE = 24
+    PLAYER_SIZE = 32
+    PROJECTILE_SIZE = 16
     TERRAIN_SIZE = 32
-    MONSTER_SIZE = 48
+    MONSTER_SIZE = 32
     SPAWNER_SIZE = 32

@@ -2,7 +2,16 @@ from src.gameobject import GameObject
 from src.static import *
 
 class Spawner(GameObject):
-    pass
+    def __init__(self, x, y, size):
+        super().__init__(x, y, size)
+        self.HP = 10
+        self.image.blit(Image.SPAWNER, (0,0))
+        
+    def update(self, data):
+        if data.timer % Value.SPAWNER_RATE == 0:
+            data.groups.monsters.add(Monster(self.x, self.y, Value.MONSTER_SIZE))
+        if self.HP <= 0:
+            data.groups.spawners.remove(self)
 
 class Monster(GameObject):
     def __init__(self, x, y, size):

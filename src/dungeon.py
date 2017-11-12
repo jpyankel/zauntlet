@@ -4,7 +4,7 @@ from src.tile import Tile
 import pygame
 from src.wall import Wall
 from src.player import Player
-from src.enemy import Monster
+from src.enemy import Monster, Spawner
 
 class Dungeon ():
     """
@@ -46,6 +46,11 @@ class Dungeon ():
                     monsterY = row*Value.CELL_SIZE + Value.CELL_SIZE/2
                     monsterX = col*Value.CELL_SIZE + Value.CELL_SIZE/2
                     data.groups.monsters.add(Monster(monsterX, monsterY, Value.MONSTER_SIZE))
+                elif currRoom[row][col] == StaticDungeonLayout.SPAWNER_CHAR:
+                    print("found a spawner")
+                    spawnerY = row*Value.CELL_SIZE + Value.CELL_SIZE/2
+                    spawnerX = col*Value.CELL_SIZE + Value.CELL_SIZE/2
+                    data.groups.spawners.add(Spawner(spawnerX, spawnerY, Value.SPAWNER_SIZE))
 
 class Room ():
     """
