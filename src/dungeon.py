@@ -28,6 +28,7 @@ class Dungeon ():
         data.groups.monsters = pygame.sprite.Group() # Remove all enemies
         data.groups.spawners = pygame.sprite.Group() # Remove old spawners
         data.groups.damagedWalls = pygame.sprite.Group() # Removed old broken walls.
+        data.groups.items = pygame.sprite.Group()
         currRoom = self.rooms[data.currentRoomsPos[1]][data.currentRoomsPos[0]]\
                    .tileList
         for row in range(StaticDungeonLayout.DUNGEON_ROOM_HEIGHT):
