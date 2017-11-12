@@ -1,5 +1,5 @@
 # Main game loop
-import pygame, socket, math, argparse
+import pygame, socket, math, argparse, time
 from src.gamedata import GameData
 from src.static import *
 from src.render import *
@@ -15,9 +15,8 @@ def main ():
     data.initGroups()
     data.dungeonMap.loadCurrentRoom(data)
     data.ui = UI(data)
-
     while data.running:
-        time = clock.tick(Value.FRAME_RATE) #similar to timerDelay
+        timer = clock.tick(Value.FRAME_RATE) #similar to timerDelay
         data.timer += 1
         for event in pygame.event.get():
             handle(event,data)
@@ -25,7 +24,6 @@ def main ():
         checkCollisions(data)
         redrawAll(screen, data)
         pygame.display.flip()
-        #print(data.mostRecentDir)
     pygame.quit()
 
 def handle(event,data):

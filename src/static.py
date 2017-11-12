@@ -57,3 +57,5 @@ class Value(object):
     MAX_HP = 3
     HEART_DROP_CHANCE = 0.25
     GHOST_SIZE = 32
+    MONSTER_LIMIT = 16
+    FPS = 60
