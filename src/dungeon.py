@@ -37,13 +37,13 @@ class Dungeon ():
                     data.groups.walls.add(newWall)
                 elif currRoom[row][col] == StaticDungeonLayout.PLAYER_CHAR:
                     if data.player != None: continue
-                    playerY = row*Value.PLAYER_SIZE + Value.PLAYER_SIZE/2
-                    playerX = col*Value.PLAYER_SIZE + Value.PLAYER_SIZE/2
+                    playerY = row*Value.CELL_SIZE + Value.CELL_SIZE/2
+                    playerX = col*Value.CELL_SIZE + Value.CELL_SIZE/2
                     data.player = Player(playerX, playerY, Value.PLAYER_SIZE)
                     data.groups.player.add(data.player)
                 elif currRoom[row][col] == StaticDungeonLayout.MONSTER_CHAR:
-                    monsterY = row*Value.MONSTER_SIZE + Value.MONSTER_SIZE/2
-                    monsterX = col*Value.MONSTER_SIZE + Value.MONSTER_SIZE/2
+                    monsterY = row*Value.CELL_SIZE + Value.CELL_SIZE/2
+                    monsterX = col*Value.CELL_SIZE + Value.CELL_SIZE/2
                     data.groups.monsters.add(Monster(monsterX, monsterY, Value.MONSTER_SIZE))
 
 class Room ():

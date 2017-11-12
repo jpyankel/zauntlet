@@ -27,7 +27,9 @@ class StaticDungeonLayout ():
 class Value(object):
     WINDOW_WIDTH = 640
     WINDOW_HEIGHT = 480
-    PLAYER_SIZE = 32
+    FRAME_RATE = 60
+    CELL_SIZE = 32
+    PLAYER_SIZE = 48
     PROJECTILE_SIZE = 16
     TERRAIN_SIZE = 32
     MONSTER_SIZE = 32
