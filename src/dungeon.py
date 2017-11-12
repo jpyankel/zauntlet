@@ -10,8 +10,12 @@ class Dungeon ():
         Contains a 2D list of Rooms.
     """
     def __init__ (self):
-        self.rooms = [[]]
-        self.rooms[0].append(Room(0,0))
+        self.rooms = []
+        for rowIndex in range(StaticDungeonLayout.DUNGEON_HEIGHT):
+            roomRow = []
+            for colIndex in range(StaticDungeonLayout.DUNGEON_WIDTH):
+                roomRow.append(Room(rowIndex, colIndex))
+            self.rooms.append(roomRow)
 
     def loadCurrentRoom (self, data):
         """
@@ -21,8 +25,8 @@ class Dungeon ():
         data.groups.terrain = pygame.sprite.Group() # Empty tileset
         currRoom = self.rooms[data.currentRoomsPos[0]][data.currentRoomsPos[1]]\
                    .tileList
-        for row in range(StaticDungeonLayout.DUNGEON_HEIGHT):
-            for col in range(StaticDungeonLayout.DUNGEON_WIDTH):
+        for row in range(StaticDungeonLayout.DUNGEON_ROOM_HEIGHT):
+            for col in range(StaticDungeonLayout.DUNGEON_ROOM_WIDTH):
                 # Create a new GameObject based on the type of tile:
                 if currRoom[row][col] == StaticDungeonLayout.WALL_CHAR:
                     newWall = Wall(row, col, data)
@@ -46,6 +50,12 @@ class Room ():
         """
         fileName = os.path.join(StaticPath.DUNGEON_LAYOUT_DIR,
                                 "%d-%d.txt" % (x, y))
-        with open(fileName) as f:
-            content = f.readlines()
-            self.tileList = [l.strip('\n') for l in content]
+        try:
+            with open(fileName) as f:
+                content = f.readlines()
+                self.tileList = [l.strip('\n') for l in content]
+        except:
+            # If we couldn't open file, make this room an empty room (full of tiles):
+            self.tileList = [[StaticDungeonLayout.TILE_CHAR] *\
+                              StaticDungeonLayout.DUNGEON_ROOM_WIDTH\
+                              for char in range(StaticDungeonLayout.DUNGEON_ROOM_HEIGHT)]

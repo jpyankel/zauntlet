@@ -12,8 +12,10 @@ class StaticPath ():
     DUNGEON_LAYOUT_DIR = "src/dungeonlayout/"
 
 class StaticDungeonLayout ():
-    DUNGEON_WIDTH = 20
-    DUNGEON_HEIGHT = 15
+    DUNGEON_ROOM_WIDTH = 20
+    DUNGEON_ROOM_HEIGHT = 15
+    DUNGEON_WIDTH = 5
+    DUNGEON_HEIGHT = 5
     WALL_CHAR = "#"
     TILE_CHAR = "-"
 
@@ -21,3 +23,5 @@ class Value(object):
     PLAYER_SIZE = 32
     PROJECTILE_SIZE = 16
     TERRAIN_SIZE = 32
+    WINDOW_WIDTH = 640
+    WINDOW_HEIGHT = 480

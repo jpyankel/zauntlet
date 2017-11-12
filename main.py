@@ -9,7 +9,7 @@ def main ():
     clock = pygame.time.Clock()
     data = GameData()
     # Initialize Screen:
-    screen = pygame.display.set_mode((data.window.width, data.window.height))
+    screen = pygame.display.set_mode((Value.WINDOW_WIDTH, Value.WINDOW_HEIGHT))
     Image.init()
     data.initGroups()
     data.dungeonMap.loadCurrentRoom(data)

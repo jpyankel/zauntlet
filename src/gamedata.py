@@ -1,5 +1,5 @@
 # Our main gamedata class.
-from src.windowdata import WindowData
+from src.static import *
 from src.player import Player
 from src.dungeon import Dungeon
 import pygame
@@ -7,16 +7,48 @@ import pygame
 class GameData(object):
     def __init__ (self):
         self.running = True
-        self.window = WindowData()
         self.currentRoomsPos = (0, 0)
         self.dungeonMap = Dungeon()
         self.keysPressed = list()
         self.mostRecentDir = None
 
     def initGroups(self):
-        self.localPlayer = Player(self.window.width/2, self.window.height/2, 32)
+        self.localPlayer = Player(Value.WINDOW_WIDTH/2, Value.WINDOW_HEIGHT/2,
+                                  32)
         self.groups = SpriteGroups()
         self.groups.player.add(self.localPlayer)
+
+    def tryTransition (self, direction):
+        """
+            Attempts a scene transition in the given direction.
+            Repositions player if successful
+        """
+        if direction == "right":
+            if self.currentRoomsPos[0] + 1 >= StaticDungeonLayout.DUNGEON_WIDTH:
+                return
+            self.currentRoomsPos = (self.currentRoomsPos[0]+1,
+                                    self.currentRoomsPos[1])
+            self.localPlayer.x = Value.PLAYER_SIZE / 2 # Reposition at left
+        elif direction == "left":
+            if self.currentRoomsPos[0] - 1 < 0:
+                return
+            self.currentRoomsPos = (self.currentRoomsPos[0]-1,
+                                    self.currentRoomsPos[1])
+            self.localPlayer.x =  Value.WINDOW_WIDTH - Value.PLAYER_SIZE / 2
+        elif direction == "up":
+            if self.currentRoomsPos[1] - 1 < 0:
+                return
+            self.currentRoomsPos = (self.currentRoomsPos[0],
+                                    self.currentRoomsPos[1]-1)
+            self.localPlayer.y = Value.WINDOW_HEIGHT - Value.PLAYER_SIZE / 2
+        elif direction == "down":
+            if self.currentRoomsPos[1] + 1 >= StaticDungeonLayout.DUNGEON_HEIGHT:
+                return
+            self.currentRoomsPos = (self.currentRoomsPos[0],
+                                    self.currentRoomsPos[1]+1)
+            self.localPlayer.y = Value.PLAYER_SIZE / 2
+        print(self.currentRoomsPos)
+        self.dungeonMap.loadCurrentRoom(self)
 
 class SpriteGroups(object):
     def __init__(self):
