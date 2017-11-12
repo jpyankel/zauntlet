@@ -1,7 +1,8 @@
 from src.gameobject import GameObject
 from src.static import *
 
-class Spawner(GameObject): pass
+class Spawner(GameObject):
+    pass
 
 class Monster(GameObject):
     def __init__(self, x, y, size):

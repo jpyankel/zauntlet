@@ -17,7 +17,8 @@ def main ():
     data.ui = UI(data)
 
     while data.running:
-        time = clock.tick(60) #similar to timerDelay
+        time = clock.tick(Value.FRAME_RATE) #similar to timerDelay
+        data.timer += 1
         screen.fill((50, 50, 50)) # background
         for event in pygame.event.get():
             handle(event,data)

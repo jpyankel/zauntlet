@@ -12,6 +12,7 @@ class GameData(object):
         self.keysPressed = list()
         self.mostRecentDir = None
         self.player = None
+        self.timer = 0
 
     def initGroups(self):
         self.groups = SpriteGroups()
