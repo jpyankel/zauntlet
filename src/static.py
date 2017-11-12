@@ -22,6 +22,8 @@ class Image(object):
         Image.DAMAGED_WALL_2 = pygame.image.load("src/images/damagedwall2.png").convert_alpha()
         Image.GHOST = pygame.image.load("src/images/ghost.png").convert_alpha()
         Image.GHOST = pygame.transform.scale(Image.GHOST, (Value.GHOST_SIZE, Value.GHOST_SIZE))
+        Image.BOSS = pygame.image.load("src/images/boss.png").convert_alpha()
+        Image.BOSS = pygame.transform.scale(Image.BOSS, (Value.BOSS_SIZE, Value.BOSS_SIZE))
 
 class StaticPath ():
     DUNGEON_LAYOUT_DIR = "src/dungeonlayout/"
@@ -38,6 +40,7 @@ class StaticDungeonLayout ():
     SPAWNER_CHAR = "S"
     DAMAGED_WALL_CHAR = "%"
     GHOST_CHAR = "G"
+    BOSS_CHAR = "B"
 
 class Value(object):
     WINDOW_WIDTH = 640
@@ -57,3 +60,4 @@ class Value(object):
     MAX_HP = 3
     HEART_DROP_CHANCE = 0.25
     GHOST_SIZE = 32
+    BOSS_SIZE = 64

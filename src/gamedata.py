@@ -61,7 +61,7 @@ class GameData(object):
         self.resetAllSpriteGroups()
         self.ui.drawGameOver(data)
 
-    def winSequence (self, data):
+    def winGameSequence (self, data):
         """
             Called when the player dies. Set up the gameOver screen.
         """

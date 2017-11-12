@@ -29,6 +29,7 @@ class Monster(GameObject):
         self.dy = 2
         self.HP = random.randint(2, 5)
         self.image.blit(Image.MONSTER, (0,0))
+        self.damage = 1
 
     def update(self, data):
         # Moves the monster toward the player at the given speed.
@@ -71,6 +72,7 @@ class Ghost(GameObject):
         self.dy = 2
         self.HP = 1
         self.image.blit(Image.GHOST, (0,0))
+        self.damage = 1
 
     def update(self, data):
         # Moves the monster toward the player at the given speed.
@@ -101,10 +103,35 @@ class Ghost(GameObject):
                 newContainer = HeartContainer(self.x, self.y)
                 data.groups.items.add(newContainer)
 
-class BossMonster(Monster):
+class Boss(GameObject):
     def __init__(self, x, y, size):
         super().__init__(x, y, size)
         self.HP = 10
+        self.dx = 0.5
+        self.dy = 0.5
+        self.image.blit(Image.BOSS, (0,0))
+        self.damage = 3
+
+    def update(self, data):
+        # Moves the monster toward the player at the given speed.
+        distance = ((self.y - data.player.y)**2 + (self.x - data.player.x)**2)**.5
+        distanceX = data.player.x - self.x
+        distanceY = data.player.y - self.y
+        dx = (self.dx * distanceX)/distance
+        dy = (self.dy * distanceY)/distance
+        collision = pygame.sprite.groupcollide(data.groups.monsters, data.groups.walls, False, False)
+        if self in collision:
+            self.x -= dx
+            self.y -= dy
+        else:
+            self.x += dx
+            self.y += dy
+        if dx <= 0:
+            self.image.blit(Image.BOSS, (0,0))
+        else:
+            self.image.blit(pygame.transform.flip(Image.BOSS, True, False), (0,0))
+        self.rect = pygame.Rect(self.x - self.size/2, self.y - self.size/2,
+                                self.size, self.size)
 
     def takeDamage(self, data):
         """

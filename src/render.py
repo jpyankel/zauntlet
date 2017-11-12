@@ -31,13 +31,19 @@ def redrawAll(screen, data):
 def checkCollisions(data):
     # Check collisions with the player and monsters:
     if data.updatePositions:
-        if pygame.sprite.groupcollide(data.groups.player, data.groups.monsters,
-                                      False, True):
-            data.player.takeDamage(data)
+        checkPlayerEnemyCollisions(data)
         # Run projectile collision detection:
         checkProjectileCollisions(data)
         # Check player item collisions:
         checkPlayerItemCollisions(data)
+
+def checkPlayerEnemyCollisions(data):
+    collision = pygame.sprite.groupcollide(data.groups.player, data.groups.monsters,\
+                                           False, True)
+    if collision:
+        for player in collision.keys():
+            for enemy in collision[player]:
+                data.player.takeDamage(data, enemy.damage)
 
 def checkProjectileCollisions(data):
     """
