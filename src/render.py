@@ -23,7 +23,12 @@ def checkCollision(data):
         data.ui.updateHearts(data)
     if pygame.sprite.groupcollide(data.groups.projectiles, data.groups.monsters, True, True):
         pass
-    if pygame.sprite.groupcollide(data.groups.projectiles, data.groups.spawners, True, False):
-        pass
-        # Fix spawner collision. Collision is stored as a dict.
-        #other.HP -= 1
+    collision = pygame.sprite.groupcollide(data.groups.projectiles,\
+                                           data.groups.spawners, True, False)
+    if collision:
+        print(collision)
+        for collide in collision.keys():
+            for item in collision[collide]:
+                item.HP -= 1
+                if item.HP <= 0: data.groups.spawners.remove(item)
+        
