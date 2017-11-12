@@ -9,7 +9,7 @@ class GameData(object):
         self.running = True
         self.updatePositions = True
         self.acceptInput = True
-        self.currentRoomsPos = (0, 0)
+        self.currentRoomsPos = (1, 2) # Magic because pressed for time.
         self.screenUI = None # Draw either a win or lose screen when this is filled
         self.dungeonMap = Dungeon()
         self.keysPressed = list()
