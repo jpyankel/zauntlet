@@ -3,7 +3,8 @@ import pygame
 class Image(object):
     @staticmethod
     def init():
-        Image.LINK = pygame.image.load("src/images/link.jpg").convert_alpha()
+        Image.LINK = pygame.image.load("src/images/link.png").convert_alpha()
+        Image.PROJECTILE = pygame.image.load("src/images/projectile.png").convert_alpha()
 
 class Value(object):
     PLAYER_SIZE = 32
