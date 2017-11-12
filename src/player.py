@@ -1,19 +1,42 @@
-from src.creature import Creature
+from src.gameobject import GameObject
 from src.static import *
-class Player (Creature):
+class Player (GameObject):
     def __init__(self, x, y, size):
         super().__init__(x, y, size)
         self.dx = 2
         self.dy = 2
+        self.facing = "down"
         self.image.blit(Image.LINK, (0,0))
     def update(self, data):
-        if "up" in data.keysPressed:
+        if data.mostRecentDir == "up":
             self.y -= self.dy
-        if "down" in data.keysPressed:
+            self.facing = data.mostRecentDir
+        elif data.mostRecentDir == "down":
             self.y += self.dy
-        if "left" in data.keysPressed:
+            self.facing = data.mostRecentDir
+        elif data.mostRecentDir == "left":
             self.x -= self.dx
-        if "right" in data.keysPressed:
+            self.facing = data.mostRecentDir
+        elif data.mostRecentDir == "right":
             self.x += self.dx
+            self.facing = data.mostRecentDir
+        self.rect = pygame.Rect(self.x - self.size/2, self.y - self.size/2,
+                                self.size, self.size)
+    def fireProjectile(self, data):
+        print("space presses, facing:", self.facing)
+        data.groups.projectiles.add(Projectile(self.x, self.y,\
+                                    self.facing, Value.PROJECTILE_SIZE))
+
+class Projectile(GameObject):
+    def __init__(self, x, y, direction, size):
+        super().__init__(x, y, size)
+        if direction == "up": self.dx, self.dy = 0, -10
+        elif direction == "down": self.dx, self.dy = 0, 10
+        elif direction == "left": self.dx, self.dy = -10, 0
+        elif direction == "right": self.dx, self.dy = 10, 0
+        self.image.blit(Image.PROJECTILE, (0,0))
+    def update(self):
+        self.x += self.dx
+        self.y += self.dy
         self.rect = pygame.Rect(self.x - self.size/2, self.y - self.size/2,
                                 self.size, self.size)

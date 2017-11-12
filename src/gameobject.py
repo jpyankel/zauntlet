@@ -1,6 +1,6 @@
 import pygame
 
-class Creature(pygame.sprite.Sprite):
+class GameObject(pygame.sprite.Sprite):
     def __init__(self, x, y, size):
         super().__init__()
         self.x = x

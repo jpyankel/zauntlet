@@ -2,7 +2,7 @@
 import pygame, socket, math, argparse
 from src.gamedata import GameData
 from src.static import *
-from src.render import redrawAll, SpriteGroups
+from src.render import redrawAll, updateAll
 
 def main ():
     pygame.init()
@@ -11,12 +11,7 @@ def main ():
     # Initialize Screen:
     screen = pygame.display.set_mode((data.window.width, data.window.height))
     Image.init()
-    data.initPlayer()
-
-    groups = SpriteGroups()
-    groups.player.add(data.localPlayer)
-
-    # Load current dungeon position.
+    data.initGroups()
     data.dungeonMap.loadCurrentRoom(data)
 
     while data.running:
@@ -25,8 +20,10 @@ def main ():
         for event in pygame.event.get():
             handle(event,data)
         screen.fill((50,50,50))
-        redrawAll(screen, data, groups)
+        updateAll(data)
+        redrawAll(screen, data)
         pygame.display.flip()
+        #print(data.mostRecentDir)
     pygame.quit()
 
 def handle(event,data):
@@ -35,36 +32,44 @@ def handle(event,data):
         data.running = False
 #when you press the keys
     if event.type == pygame.KEYDOWN:
+        print(event.key)
         if event.key == pygame.K_UP:
-            data.keysPressed.add("up")
-        elif event.key == pygame.K_DOWN:
-            data.keysPressed.add("down")
-        elif event.key == pygame.K_LEFT:
-            data.keysPressed.add("left")
-        elif event.key == pygame.K_RIGHT:
-            data.keysPressed.add("right")
-        elif event.key == pygame.K_ESCAPE:#when you press the escape button
+            data.mostRecentDir = "up"
+            data.keysPressed.append("up")
+        if event.key == pygame.K_DOWN:
+            data.mostRecentDir = "down"
+            data.keysPressed.append("down")
+        if event.key == pygame.K_LEFT:
+            data.mostRecentDir = "left"
+            data.keysPressed.append("left")
+        if event.key == pygame.K_RIGHT:
+            data.mostRecentDir = "right"
+            data.keysPressed.append("right")
+        if event.key == pygame.K_ESCAPE:#when you press the escape button
             data.running = False
+        if event.key == pygame.K_SPACE:
+            print("called space")
+            data.localPlayer.fireProjectile(data)
 #when you get off the keys
-    elif event.type == pygame.KEYUP:
+    if event.type == pygame.KEYUP:
         if event.key == pygame.K_UP:
             data.keysPressed.remove("up")
-        elif event.key == pygame.K_DOWN:
+            if data.mostRecentDir == "up":
+                data.mostRecentDir = None
+        if event.key == pygame.K_DOWN:
             data.keysPressed.remove("down")
-        elif event.key == pygame.K_LEFT:
+            if data.mostRecentDir == "down":
+                data.mostRecentDir = None
+        if event.key == pygame.K_LEFT:
             data.keysPressed.remove("left")
-        elif event.key == pygame.K_RIGHT:
+            if data.mostRecentDir == "left":
+                data.mostRecentDir = None
+        if event.key == pygame.K_RIGHT:
             data.keysPressed.remove("right")
-def handleMovement(event,data):
-    # changing the x and y coordinates depending on the keys pressed
-    if "up" in data.keysPressed:
-        dir = (0,1)
-    elif "down" in data.keysPressed:
-        dir = (0,-1)
-    elif "left" in data.keysPressed:
-        dir = (-1,0)
-    elif "right" in data.keysPressed:
-        dir = (1,0)
+            if data.mostRecentDir == "right":
+                data.mostRecentDir = None
+        if data.mostRecentDir == None and len(data.keysPressed)> 0:
+            data.mostRecentDir = data.keysPressed[-1]
 
 if __name__ == "__main__":
     main()
