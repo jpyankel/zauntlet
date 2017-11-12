@@ -3,7 +3,7 @@ import pygame
 
 def updateAll(data):
     data.groups.player.update(data)
-    data.groups.projectiles.update()
+    data.groups.projectiles.update(data)
 
 def redrawAll(screen, data):
     #data.groups.terrain.draw(screen)

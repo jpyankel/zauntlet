@@ -29,7 +29,6 @@ def handle(event,data):
         data.running = False
 #when you press the keys
     if event.type == pygame.KEYDOWN:
-        print(event.key)
         if event.key == pygame.K_UP:
             data.mostRecentDir = "up"
             data.keysPressed.append("up")
@@ -45,7 +44,6 @@ def handle(event,data):
         if event.key == pygame.K_ESCAPE:#when you press the escape button
             data.running = False
         if event.key == pygame.K_SPACE:
-            print("called space")
             data.localPlayer.fireProjectile(data)
 #when you get off the keys
     if event.type == pygame.KEYUP:

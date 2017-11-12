@@ -23,7 +23,6 @@ class Player (GameObject):
         self.rect = pygame.Rect(self.x - self.size/2, self.y - self.size/2,
                                 self.size, self.size)
     def fireProjectile(self, data):
-        print("space presses, facing:", self.facing)
         data.groups.projectiles.add(Projectile(self.x, self.y,\
                                     self.facing, Value.PROJECTILE_SIZE))
 
@@ -35,8 +34,12 @@ class Projectile(GameObject):
         elif direction == "left": self.dx, self.dy = -10, 0
         elif direction == "right": self.dx, self.dy = 10, 0
         self.image.blit(Image.PROJECTILE, (0,0))
-    def update(self):
+    def update(self, data):
         self.x += self.dx
         self.y += self.dy
+        if self.x < 0 or self.x > data.window.width:
+            data.groups.projectiles.remove(self)
+        elif self.y < 0 or self.y > data.window.height:
+            data.groups.projectiles.remove(self)
         self.rect = pygame.Rect(self.x - self.size/2, self.y - self.size/2,
                                 self.size, self.size)
