@@ -13,6 +13,7 @@ class Image(object):
         Image.MONSTER = pygame.transform.scale(Image.MONSTER, (Value.MONSTER_SIZE, Value.MONSTER_SIZE))
         Image.SPAWNER = pygame.image.load("src/images/spawner.png").convert_alpha()
         Image.SPAWNER = pygame.transform.scale(Image.SPAWNER, (Value.SPAWNER_SIZE, Value.SPAWNER_SIZE))
+        Image.HEART = pygame.image.load("src/images/heart.png").convert_alpha()
 
 class StaticPath ():
     DUNGEON_LAYOUT_DIR = "src/dungeonlayout/"
@@ -39,3 +40,4 @@ class Value(object):
     TERRAIN_SIZE = 32
     MONSTER_SIZE = 32
     SPAWNER_SIZE = 32
+    UI_HEART_SIZE = 16
