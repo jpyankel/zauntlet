@@ -7,7 +7,7 @@ class Player (GameObject):
         self.dy = 2
         self.facing = "down"
         self.image.blit(Image.LINK, (0,0))
-        self.HP = 3
+        self.HP = Value.MAX_HP
     def update(self, data):
         # Checks if the player is colliding with a wall, and moves him if he's not.
         if pygame.sprite.groupcollide(data.groups.player, data.groups.walls, False, False):
@@ -57,6 +57,12 @@ class Player (GameObject):
         if sceneTransitionDir != None:
             # Attempt a screen transition:
             data.tryTransition(sceneTransitionDir)
+
+    def addHP (self, data, amount=1):
+        """ Adds HP to the player and prevents overflow"""
+        if self.HP + amount <= Value.MAX_HP:
+            self.HP += amount
+            data.ui.updateHearts(data)
 
 class Projectile(GameObject):
     def __init__(self, x, y, direction, size):

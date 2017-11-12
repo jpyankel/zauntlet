@@ -1,5 +1,7 @@
 from src.gameobject import GameObject
 from src.static import *
+from src.item import FoodOfYendor, HeartContainer
+import random
 
 class Spawner(GameObject):
     def __init__(self, x, y, size):
@@ -48,8 +50,24 @@ class Monster(GameObject):
         self.HP -= 1
         if self.HP <= 0:
             data.groups.monsters.remove(self)
+            # Randomly drop a heart container:
+            if (random.random() <= Value.HEART_DROP_CHANCE):
+                newContainer = HeartContainer(self.x, self.y)
+                data.groups.items.add(newContainer)
 
 class BossMonster(Monster):
     def __init__(self, x, y, size):
         super().__init__(x, y, size)
         self.HP = 10
+
+    def takeDamage(self, data):
+        """
+            Causes this boss monster to take damage.
+            If HP becomes 0, then this object is deleted.
+            Also, the Food of Yendor is spawned.
+        """
+        self.HP -= 1
+        if self.HP <= 0:
+            data.groups.monsters.remove(self)
+            newFood = FoodOfYendor(self.x, self.y)
+            data.groups.items.add(newFood)

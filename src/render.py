@@ -21,6 +21,7 @@ def redrawAll(screen, data):
     data.groups.projectiles.draw(screen)
     data.groups.spawners.draw(screen)
     data.groups.monsters.draw(screen)
+    data.groups.items.draw(screen)
     data.groups.ui.draw(screen)
     data.groups.damagedWalls.draw(screen)
 
@@ -32,6 +33,8 @@ def checkCollisions(data):
         data.ui.updateHearts(data)
     # Run projectile collision detection:
     checkProjectileCollisions(data)
+    # Check player item collisions:
+    checkPlayerItemCollisions(data)
 
 def checkProjectileCollisions(data):
     """
@@ -60,3 +63,13 @@ def checkProjectileCollisions(data):
         for projectile in collisions.keys():
             for spawner in collisions[projectile]:
                 spawner.takeDamage(data)
+
+def checkPlayerItemCollisions(data):
+    """
+        Despawns items touched by player and activates their effects.
+    """
+    collisions = pygame.sprite.groupcollide(data.groups.player,
+                                            data.groups.items, False, False)
+    for player in collisions.keys():
+        for item in collisions[player]:
+            item.onPickup(data)
