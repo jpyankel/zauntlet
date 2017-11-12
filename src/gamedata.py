@@ -14,9 +14,7 @@ class GameData(object):
         self.mostRecentDir = None
 
     def initGroups(self):
-        self.localPlayer = Player(self.window.width/2, self.window.height/2, 32)
         self.groups = SpriteGroups()
-        self.groups.player.add(self.localPlayer)
 
 class SpriteGroups(object):
     def __init__(self):
@@ -24,3 +22,4 @@ class SpriteGroups(object):
         self.walls = pygame.sprite.Group()
         self.player = pygame.sprite.Group()
         self.projectiles = pygame.sprite.Group()
+        self.monsters = pygame.sprite.Group()

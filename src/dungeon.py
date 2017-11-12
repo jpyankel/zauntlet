@@ -3,6 +3,8 @@ from src.static import StaticPath, StaticDungeonLayout, Value
 from src.tile import Tile
 import pygame
 from src.wall import Wall
+from src.player import Player
+from src.enemy import Monster
 
 class Dungeon ():
     """
@@ -24,12 +26,20 @@ class Dungeon ():
         for row in range(StaticDungeonLayout.DUNGEON_HEIGHT):
             for col in range(StaticDungeonLayout.DUNGEON_WIDTH):
                 # Create a new GameObject based on the type of tile:
+                newTile = Tile(row, col, data)
+                data.groups.terrain.add(newTile)
                 if currRoom[row][col] == StaticDungeonLayout.WALL_CHAR:
                     newWall = Wall(row, col, data)
                     data.groups.walls.add(newWall)
-                elif currRoom[row][col] == StaticDungeonLayout.TILE_CHAR:
-                    newTile = Tile(row, col, data)
-                    data.groups.terrain.add(newTile)
+                elif currRoom[row][col] == StaticDungeonLayout.PLAYER_CHAR:
+                    playerY = row*Value.PLAYER_SIZE + Value.PLAYER_SIZE/2
+                    playerX = col*Value.PLAYER_SIZE + Value.PLAYER_SIZE/2
+                    data.player = Player(playerX, playerY, Value.PLAYER_SIZE)
+                    data.groups.player.add(data.player)
+                elif currRoom[row][col] == StaticDungeonLayout.MONSTER_CHAR:
+                    monsterY = row*Value.MONSTER_SIZE + Value.MONSTER_SIZE/2
+                    monsterX = col*Value.MONSTER_SIZE + Value.MONSTER_SIZE/2
+                    data.groups.monsters.add(Monster(monsterX, monsterY, Value.MONSTER_SIZE))
 
 class Room ():
     """

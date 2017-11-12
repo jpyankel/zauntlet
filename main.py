@@ -2,7 +2,7 @@
 import pygame, socket, math, argparse
 from src.gamedata import GameData
 from src.static import *
-from src.render import redrawAll, updateAll
+from src.render import *
 
 def main ():
     pygame.init()
@@ -20,6 +20,7 @@ def main ():
         for event in pygame.event.get():
             handle(event,data)
         updateAll(data)
+        checkCollision(data)
         redrawAll(screen, data)
         pygame.display.flip()
         #print(data.mostRecentDir)
@@ -46,7 +47,7 @@ def handle(event,data):
         if event.key == pygame.K_ESCAPE:#when you press the escape button
             data.running = False
         if event.key == pygame.K_SPACE:
-            data.localPlayer.fireProjectile(data)
+            data.player.fireProjectile(data)
 #when you get off the keys
     if event.type == pygame.KEYUP:
         if event.key == pygame.K_UP:

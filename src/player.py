@@ -7,19 +7,27 @@ class Player (GameObject):
         self.dy = 2
         self.facing = "down"
         self.image.blit(Image.LINK, (0,0))
+        self.HP = 3
     def update(self, data):
-        if data.mostRecentDir == "up":
-            self.y -= self.dy
-            self.facing = data.mostRecentDir
-        elif data.mostRecentDir == "down":
-            self.y += self.dy
-            self.facing = data.mostRecentDir
-        elif data.mostRecentDir == "left":
-            self.x -= self.dx
-            self.facing = data.mostRecentDir
-        elif data.mostRecentDir == "right":
-            self.x += self.dx
-            self.facing = data.mostRecentDir
+        # Checks if the player is colliding with a wall, and moves him if he's not.
+        if pygame.sprite.groupcollide(data.groups.player, data.groups.walls, False, False):
+            if self.facing == "right": self.x -= self.dx
+            elif self.facing == "left": self.x += self.dx
+            elif self.facing == "up": self.y += self.dy
+            elif self.facing == "down": self.y -= self.dy
+        else:
+            if data.mostRecentDir == "up":
+                self.y -= self.dy
+                self.facing = data.mostRecentDir
+            elif data.mostRecentDir == "down":
+                self.y += self.dy
+                self.facing = data.mostRecentDir
+            elif data.mostRecentDir == "left":
+                self.x -= self.dx
+                self.facing = data.mostRecentDir
+            elif data.mostRecentDir == "right":
+                self.x += self.dx
+                self.facing = data.mostRecentDir
         self.rect = pygame.Rect(self.x - self.size/2, self.y - self.size/2,
                                 self.size, self.size)
     def fireProjectile(self, data):
