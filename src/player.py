@@ -7,21 +7,21 @@ class Player (GameObject):
         self.dy = 2
         self.image.blit(Image.LINK, (0,0))
     def update(self, data):
-        if "up" in data.keysPressed:
+        if data.mostRecentDir == "up":
             self.y -= self.dy
-        if "down" in data.keysPressed:
+        elif data.mostRecentDir == "down":
             self.y += self.dy
-        if "left" in data.keysPressed:
+        elif data.mostRecentDir == "left":
             self.x -= self.dx
-        if "right" in data.keysPressed:
+        elif data.mostRecentDir == "right":
             self.x += self.dx
-        if "space" in data.keysPressed:
+        elif "space" in data.keysPressed:
             self.fireProjectile(data)
         self.rect = pygame.Rect(self.x - self.size/2, self.y - self.size/2,
                                 self.size, self.size)
     def fireProjectile(self, data):
-        data.groups.projectiles.add(Projectile(self.x, self.y, "up",\
-                                               Value.PROJECTILE_SIZE)
+        data.groups.projectiles.add(Projectile(self.x, self.y,\
+                                    data.mostRecentDir, Value.PROJECTILE_SIZE))
 
 class Projectile(GameObject):
     def __init__(self, x, y, direction, size):

@@ -21,44 +21,47 @@ def main():
         updateAll(data)
         redrawAll(screen, data)
         pygame.display.flip()
+        #print(data.mostRecentDir)
     pygame.quit()
-    
 def handle(event,data):
 #When you quit the window
     if event.type == pygame.QUIT:
         data.running = False
 #when you press the keys
     if event.type == pygame.KEYDOWN:
+        print(event.key)
         if event.key == pygame.K_UP:
+            data.mostRecentDir = "up"
             data.keysPressed.add("up")
-        elif event.key == pygame.K_DOWN:
+        if event.key == pygame.K_DOWN:
+            data.mostRecentDir = "down"
             data.keysPressed.add("down")
-        elif event.key == pygame.K_LEFT:
+        if event.key == pygame.K_LEFT:
+            data.mostRecentDir = "left"
             data.keysPressed.add("left")
-        elif event.key == pygame.K_RIGHT:
+        if event.key == pygame.K_RIGHT:
+            data.mostRecentDir = "right"
             data.keysPressed.add("right")
-        elif event.key == pygame.K_ESCAPE:#when you press the escape button
+        if event.key == pygame.K_ESCAPE:#when you press the escape button
             data.running = False
 #when you get off the keys
-    elif event.type == pygame.KEYUP:
+    if event.type == pygame.KEYUP:
         if event.key == pygame.K_UP:
             data.keysPressed.remove("up")
-        elif event.key == pygame.K_DOWN:
+            if data.mostRecentDir == "up":
+                data.mostRecentDir = None
+        if event.key == pygame.K_DOWN:
             data.keysPressed.remove("down")
-        elif event.key == pygame.K_LEFT:
+            if data.mostRecentDir == "down":
+                data.mostRecentDir = None
+        if event.key == pygame.K_LEFT:
             data.keysPressed.remove("left")
-        elif event.key == pygame.K_RIGHT:
+            if data.mostRecentDir == "left":
+                data.mostRecentDir = None
+        if event.key == pygame.K_RIGHT:
             data.keysPressed.remove("right")
-def handleMovement(event,data):
-#changing the x and y coordinates depending on the keys pressed 
-    if "up" in data.keysPressed:
-        dir = (0,1)
-    elif "down" in data.keysPressed:
-        dir = (0,-1)
-    elif "left" in data.keysPressed:
-        dir = (-1,0)
-    elif "right" in data.keysPressed:
-        dir = (1,0)
+            if data.mostRecentDir == "right":
+                data.mostRecentDir = None
 
 main()
 
