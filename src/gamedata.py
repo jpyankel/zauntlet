@@ -7,7 +7,7 @@ class GameData(object):
     def __init__ (self):
         self.running = True
         self.window = WindowData()
-        self.keysPressed = set()
+        self.keysPressed = list()
         self.mostRecentDir = None 
     def initGroups(self):
         self.localPlayer = Player(self.window.width/2, self.window.height/2, 32)

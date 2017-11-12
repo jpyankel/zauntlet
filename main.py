@@ -32,18 +32,20 @@ def handle(event,data):
         print(event.key)
         if event.key == pygame.K_UP:
             data.mostRecentDir = "up"
-            data.keysPressed.add("up")
+            data.keysPressed.append("up")
         if event.key == pygame.K_DOWN:
             data.mostRecentDir = "down"
-            data.keysPressed.add("down")
+            data.keysPressed.append("down")
         if event.key == pygame.K_LEFT:
             data.mostRecentDir = "left"
-            data.keysPressed.add("left")
+            data.keysPressed.append("left")
         if event.key == pygame.K_RIGHT:
             data.mostRecentDir = "right"
-            data.keysPressed.add("right")
+            data.keysPressed.append("right")
         if event.key == pygame.K_ESCAPE:#when you press the escape button
             data.running = False
+        if event.key == pygame.K_SPACE:
+            data.localplayer.fireProjectile(data)
 #when you get off the keys
     if event.type == pygame.KEYUP:
         if event.key == pygame.K_UP:
@@ -62,6 +64,8 @@ def handle(event,data):
             data.keysPressed.remove("right")
             if data.mostRecentDir == "right":
                 data.mostRecentDir = None
+        if data.mostRecentDir == None and len(data.keysPressed)> 0:
+            data.mostRecentDir = data.keysPressed[-1]
 
 main()
 
