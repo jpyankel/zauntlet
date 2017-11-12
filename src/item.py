@@ -15,6 +15,21 @@ class Items (GameObject):
         """
         data.groups.items.remove(self)
 
+class HeartContainer (Items):
+    """
+        Heart containers add player HP back.
+    """
+
+    def __init__ (self, row, col):
+        super().__init__(row, col, Image.HEART, Value.HEART_CONTAINER_SIZE)
+
+    def onPickup (self, data):
+        """
+            Add player HP
+        """
+        data.player.addHP(data)
+        data.groups.items.remove(self)
+
 class FoodOfYendor (Items):
     """
         The fabled FoodOfYendor.
