@@ -25,6 +25,6 @@ class DamagedWall(GameObject):
         elif self.HP <= self.MaxHP/3 and self.HP > 0:
             pass
         elif self.HP <= 0:
-            data.groups.damagedWalls.remove(self)
+            data.groups.walls.remove(self)
         
         

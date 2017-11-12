@@ -22,7 +22,7 @@ def main ():
         for event in pygame.event.get():
             handle(event,data)
         updateAll(data)
-        checkCollision(data)
+        checkCollisions(data)
         redrawAll(screen, data)
         pygame.display.flip()
         #print(data.mostRecentDir)

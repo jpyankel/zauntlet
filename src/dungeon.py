@@ -55,7 +55,7 @@ class Dungeon ():
                 elif currRoom[row][col] == StaticDungeonLayout.DAMAGED_WALL_CHAR:
                     wallX = col*Value.CELL_SIZE + Value.CELL_SIZE/2
                     wallY = row*Value.CELL_SIZE + Value.CELL_SIZE/2
-                    data.groups.damagedWalls.add(DamagedWall(wallX, wallY, Value.TERRAIN_SIZE))
+                    data.groups.walls.add(DamagedWall(wallX, wallY, Value.TERRAIN_SIZE))
 
 class Room ():
     """
