@@ -20,6 +20,7 @@ def redrawAll(screen, data):
     data.groups.projectiles.draw(screen)
     data.groups.spawners.draw(screen)
     data.groups.monsters.draw(screen)
+    data.groups.items.draw(screen)
     data.groups.ui.draw(screen)
 
 def checkCollisions(data):
