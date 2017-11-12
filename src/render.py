@@ -15,6 +15,7 @@ def redrawAll(screen, data):
     data.groups.spawners.draw(screen)
     data.groups.monsters.draw(screen)
     data.groups.ui.draw(screen)
+    data.groups.damagedWalls.draw(screen)
 
 def checkCollision(data):
     pygame.sprite.groupcollide(data.groups.projectiles, data.groups.walls, True, False)
@@ -26,9 +27,13 @@ def checkCollision(data):
     collision = pygame.sprite.groupcollide(data.groups.projectiles,\
                                            data.groups.spawners, True, False)
     if collision:
-        print(collision)
         for collide in collision.keys():
             for item in collision[collide]:
                 item.HP -= 1
                 if item.HP <= 0: data.groups.spawners.remove(item)
-        
+    collision = pygame.sprite.groupcollide(data.groups.projectiles,\
+                                           data.groups.walls, True, False)
+    if collision:
+        for collide in collision.keys():
+            for item in collision[collide]:
+                item.takeDamage(data)

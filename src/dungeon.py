@@ -2,7 +2,7 @@ import os
 from src.static import StaticPath, StaticDungeonLayout, Value
 from src.tile import Tile
 import pygame
-from src.wall import Wall
+from src.wall import Wall, DamagedWall
 from src.player import Player
 from src.enemy import Monster, Spawner
 
@@ -27,6 +27,7 @@ class Dungeon ():
         data.groups.terrain = pygame.sprite.Group() # Empty tileset
         data.groups.monsters = pygame.sprite.Group() # Remove all enemies
         data.groups.spawners = pygame.sprite.Group() # Remove old spawners
+        data.groups.damagedWalls = pygame.sprite.Group() # Removed old broken walls.
         currRoom = self.rooms[data.currentRoomsPos[0]][data.currentRoomsPos[1]]\
                    .tileList
         for row in range(StaticDungeonLayout.DUNGEON_ROOM_HEIGHT):
@@ -48,10 +49,13 @@ class Dungeon ():
                     monsterX = col*Value.CELL_SIZE + Value.CELL_SIZE/2
                     data.groups.monsters.add(Monster(monsterX, monsterY, Value.MONSTER_SIZE))
                 elif currRoom[row][col] == StaticDungeonLayout.SPAWNER_CHAR:
-                    print("found a spawner")
                     spawnerY = row*Value.CELL_SIZE + Value.CELL_SIZE/2
                     spawnerX = col*Value.CELL_SIZE + Value.CELL_SIZE/2
                     data.groups.spawners.add(Spawner(spawnerX, spawnerY, Value.SPAWNER_SIZE))
+                elif currRoom[row][col] == StaticDungeonLayout.DAMAGED_WALL_CHAR:
+                    wallX = col*Value.CELL_SIZE + Value.CELL_SIZE/2
+                    wallY = row*Value.CELL_SIZE + Value.CELL_SIZE/2
+                    data.groups.damagedWalls.add(DamagedWall(wallX, wallY, Value.TERRAIN_SIZE))
 
 class Room ():
     """

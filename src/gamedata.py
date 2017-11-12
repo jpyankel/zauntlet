@@ -58,3 +58,4 @@ class SpriteGroups(object):
         self.monsters = pygame.sprite.Group()
         self.spawners = pygame.sprite.Group()
         self.ui = pygame.sprite.Group()
+        self.damagedWalls = pygame.sprite.Group()
