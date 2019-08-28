@@ -8,7 +8,7 @@ Use the arrow keys to move and the space bar to shoot fireballs. Defeat monsters
 
 ## How to Run
 Prerequisites are:
-* Python 3+
+* Python 3.6.x
 * PyGame 1.9.3 (Installation instructions included below)
 
 Instructions:
